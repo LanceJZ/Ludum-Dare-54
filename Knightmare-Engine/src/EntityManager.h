@@ -24,6 +24,7 @@ public:
 	size_t AddLineModel(LineModelPoints model);
 	size_t AddLineModel();
 	size_t AddModel3D(Model3D* model, Camera* camera);
+	size_t AddModel3D(Model3D* model);
 	size_t AddModel3D(Model model);
 	size_t AddTimer();
 	size_t AddTimer(float amount);

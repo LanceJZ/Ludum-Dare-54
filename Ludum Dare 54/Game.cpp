@@ -10,11 +10,15 @@ Game::~Game()
 
 bool Game::Initialize(Camera &camera) //Initialize
 {
-	TheCamera = camera;
+	Cam = camera;
 
-	Man.EM.AddModel3D(ThePlayer = new Player(), &TheCamera);
+	Man.EM.AddModel3D(ThePlayer = new Player(), &Cam);
+	Man.EM.AddCommon(Enemies = new EnemyController());
 	ThePlayer->SetManagersRef(Man);
-	ThePlayer->SetCameraRef(TheCamera);
+	ThePlayer->SetCameraRef(Cam);
+	Enemies->SetManagersRef(Man);
+	Enemies->SetCameraRef(Cam);
+	Enemies->SetPlayerRef(ThePlayer);
 	Man.Initialize();
 
 	SetTargetFPS(120);
@@ -27,6 +31,7 @@ bool Game::Load()
 {
 	ThePlayer->SetShipModelID(Man.CM.LoadTheModel("PlayerShip"));
 	ThePlayer->SetShotModelID(Man.CM.LoadTheModel("PlayerShot"));
+	Enemies->SetShipOne(Man.CM.LoadTheModel("EnemyOne"));
 
 	return true;
 }
@@ -121,7 +126,7 @@ void Game::Draw()
 {
 	BeginDrawing();
 	ClearBackground({ 8, 2, 16, 100 });
-	BeginMode3D(TheCamera);
+	BeginMode3D(Cam);
 
 	//3D Drawing here.
 	Draw3D();

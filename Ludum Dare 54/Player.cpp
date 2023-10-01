@@ -32,7 +32,7 @@ bool Player::Initialize()
 {
 	Model3D::Initialize();
 	Cull = false;
-
+	Radius = 20;
 	Enabled = true;
 	return false;
 }
@@ -114,7 +114,7 @@ void Player::Fire()
 	if (spawnNewShot)
 	{
 		Shots.push_back(new PlayerShot());
-		Man->EM.AddModel3D(Shots[shotNumber], Cam);
+		Man->EM.AddModel3D(Shots[shotNumber]);
 		Shots[shotNumber]->SetModel(Man->CM.GetModel(ShotModelID), 20.0f);
 		Shots[shotNumber]->SetManagersRef(Man->EM);
 		Shots[shotNumber]->BeginRun(Cam);

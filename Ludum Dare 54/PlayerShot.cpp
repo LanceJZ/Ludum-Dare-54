@@ -17,6 +17,7 @@ bool PlayerShot::Initialize()
 {
 	Model3D::Initialize();
 	Cull = false;
+	Radius = 5;
 
 	return false;
 }

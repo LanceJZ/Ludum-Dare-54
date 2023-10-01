@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "Managers.h"
 #include "Player.h"
+#include "EnemyController.h"
 
 enum GameState
 {
@@ -23,7 +24,7 @@ public:
 
 	bool PlayBackgroundMusic = true;
 	GameState State = MainMenu;
-	Camera TheCamera = { 0 };
+	Camera Cam = { 0 };
 
 	bool Initialize(Camera &camera);
 	bool Load();
@@ -33,8 +34,9 @@ public:
 	void Draw();
 
 private:
-	Managers Man;
-	Player* ThePlayer;
+	Managers Man = {};
+	Player* ThePlayer = {};
+	EnemyController* Enemies = {};
 
 	void NewGame();
 	void Draw3D();

@@ -169,13 +169,19 @@ size_t EntityManager::AddLineModel()
 
 size_t EntityManager::AddModel3D(Model3D* model, Camera* camera)
 {
+	TheCamera = camera;
+
+	return AddModel3D(model);
+}
+
+size_t EntityManager::AddModel3D(Model3D* model)
+{
 	size_t modelNumber = Model3Ds.size();
 
-	TheCamera = camera;
 	Model3Ds.push_back(model);
 	Model3Ds[modelNumber]->Initialize();
 
-	return modelNumber;
+	return size_t();
 }
 
 size_t EntityManager::AddModel3D(Model model)

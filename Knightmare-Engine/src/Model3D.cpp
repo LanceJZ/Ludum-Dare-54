@@ -64,6 +64,10 @@ void Model3D::Draw()
 
 		if (TheCamera == nullptr)
 		{
+			TraceLog(LOG_INFO, "***************\n");
+			TraceLog(LOG_ERROR,
+			"*****************  Camera Reference is missing! ******************\n");
+
 			return;
 		}
 
