@@ -12,10 +12,10 @@ bool Game::Initialize(Camera &camera) //Initialize
 {
 	TheCamera = camera;
 
-	Man.Initialize();
 	Man.EM.AddModel3D(ThePlayer = new Player(), &TheCamera);
-	ThePlayer->Initialize();
 	ThePlayer->SetManagersRef(Man);
+	ThePlayer->SetCameraRef(TheCamera);
+	Man.Initialize();
 
 	SetTargetFPS(120);
 	SetWindowTitle("Ludum Dare 54");
@@ -26,6 +26,7 @@ bool Game::Initialize(Camera &camera) //Initialize
 bool Game::Load()
 {
 	ThePlayer->SetShipModelID(Man.CM.LoadTheModel("PlayerShip"));
+	ThePlayer->SetShotModelID(Man.CM.LoadTheModel("PlayerShot"));
 
 	return true;
 }

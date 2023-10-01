@@ -60,14 +60,14 @@ bool EntityManager::BeginRun()
 
 void EntityManager::Input()
 {
-	for (auto lineModel : LineModels)
+	for (size_t i = 0; i < LineModels.size(); i++)
 	{
-		lineModel->Input();
+		LineModels[i]->Input();
 	}
 
-	for (auto model3D : Model3Ds)
+	for (size_t i = 0; i < Model3Ds.size(); i++)
 	{
-		model3D->Input();
+		Model3Ds[i]->Input();
 	}
 }
 
@@ -178,7 +178,7 @@ size_t EntityManager::AddModel3D(Model3D* model, Camera* camera)
 	return modelNumber;
 }
 
-size_t EntityManager::AddModel3D(Model model, Camera* camera)
+size_t EntityManager::AddModel3D(Model model)
 {
 	size_t modelNumber = Model3Ds.size();
 	Model3Ds.push_back(new Model3D());
@@ -194,6 +194,14 @@ size_t EntityManager::AddTimer()
 	Timers.push_back(new Timer());
 
 	return timerNumber;
+}
+
+size_t EntityManager::AddTimer(float amount)
+{
+	size_t number = AddTimer();
+	Timers[number]->Set(amount);
+
+	return size_t();
 }
 
 size_t EntityManager::AddCommon(Common* common)

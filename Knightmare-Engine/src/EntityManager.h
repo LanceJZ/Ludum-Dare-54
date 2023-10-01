@@ -24,19 +24,20 @@ public:
 	size_t AddLineModel(LineModelPoints model);
 	size_t AddLineModel();
 	size_t AddModel3D(Model3D* model, Camera* camera);
-	size_t AddModel3D(Model model, Camera* camera);
+	size_t AddModel3D(Model model);
 	size_t AddTimer();
+	size_t AddTimer(float amount);
 	size_t AddCommon(Common* common);
 
 	Entity* CreateEntity();
 	LineModel* CreateLineModel();
 	Model3D* CreateModel3D(Model model, Camera* camera);
 
-	std::vector<Entity*> Entities;
-	std::vector<LineModel*> LineModels;
-	std::vector<Model3D*> Model3Ds;
-	std::vector<Timer*> Timers;
-	std::vector<Common*> Commons;
+	std::vector<Entity*> Entities = {};
+	std::vector<LineModel*> LineModels = {};
+	std::vector<Model3D*> Model3Ds = {};
+	std::vector<Timer*> Timers = {};
+	std::vector<Common*> Commons = {};
 
 private:
 	Camera* TheCamera = {};

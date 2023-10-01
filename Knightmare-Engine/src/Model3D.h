@@ -25,6 +25,7 @@ public:
 	virtual void SetModel(Model &model, float scale);
 	virtual void SetModelCopy(Model model, float scale);
 	virtual Model& GetModel();
+	virtual void Spawn(Vector3 pos, Vector3 vel);
 	void Unload();
 
 private:

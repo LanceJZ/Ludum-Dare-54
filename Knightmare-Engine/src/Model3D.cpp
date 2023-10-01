@@ -49,7 +49,6 @@ bool Model3D::BeginRun(Camera* camera)
 
 void Model3D::Input()
 {
-
 }
 
 void Model3D::Update(float deltaTime)
@@ -171,6 +170,10 @@ void Model3D::SetModelCopy(Model model, float scale)
 Model& Model3D::GetModel()
 {
 	return TheModel;
+}
+
+void Model3D::Spawn(Vector3 pos, Vector3 vel)
+{
 }
 
 void Model3D::Unload()
