@@ -2,8 +2,8 @@
 
 bool Common::Initialize()
 {
-	GameScreenHalfHeight = GetScreenHeight() * 0.5f;
-	GameScreenHalfWidth = GetScreenWidth() * 0.5f;
+	GameWindowHalfHeight = GetScreenHeight() * 0.5f;
+	GameWindowHalfWidth = GetScreenWidth() * 0.5f;
 
 	return false;
 }
@@ -20,7 +20,7 @@ void Common::Update()
 
 float Common::GetRandomScreenY()
 {
-	return GetRandomFloat(-GameScreenHalfHeight, GameScreenHalfHeight);
+	return GetRandomFloat(-GameWindowHalfHeight, GameWindowHalfHeight);
 }
 
 float Common::GetRandomFloat(float min, float max)

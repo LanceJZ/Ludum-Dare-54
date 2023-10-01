@@ -4,6 +4,7 @@
 #include "Managers.h"
 #include "Player.h"
 #include "EnemyController.h"
+#include "Border.h"
 
 enum GameState
 {
@@ -37,6 +38,7 @@ private:
 	Managers Man = {};
 	Player* ThePlayer = {};
 	EnemyController* Enemies = {};
+	Border* Borders = {};
 
 	void NewGame();
 	void Draw3D();

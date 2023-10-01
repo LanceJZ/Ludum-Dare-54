@@ -14,11 +14,16 @@ bool Game::Initialize(Camera &camera) //Initialize
 
 	Man.EM.AddModel3D(ThePlayer = new Player(), &Cam);
 	Man.EM.AddCommon(Enemies = new EnemyController());
+	Man.EM.AddCommon(Borders = new Border());
 	ThePlayer->SetManagersRef(Man);
 	ThePlayer->SetCameraRef(Cam);
 	Enemies->SetManagersRef(Man);
 	Enemies->SetCameraRef(Cam);
 	Enemies->SetPlayerRef(ThePlayer);
+	Enemies->SetBorderRef(Borders);
+	Borders->SetManagersRef(Man);
+	Borders->SetCameraRef(Cam);
+
 	Man.Initialize();
 
 	SetTargetFPS(120);
@@ -31,7 +36,8 @@ bool Game::Load()
 {
 	ThePlayer->SetShipModelID(Man.CM.LoadTheModel("PlayerShip"));
 	ThePlayer->SetShotModelID(Man.CM.LoadTheModel("PlayerShot"));
-	Enemies->SetShipOne(Man.CM.LoadTheModel("EnemyOne"));
+	Enemies->SetShipOneModelID(Man.CM.LoadTheModel("EnemyOne"));
+	Borders->SetBorderModelID(Man.CM.LoadTheModel("Border"));
 
 	return true;
 }

@@ -207,7 +207,7 @@ size_t EntityManager::AddTimer(float amount)
 	size_t number = AddTimer();
 	Timers[number]->Set(amount);
 
-	return size_t();
+	return number;
 }
 
 size_t EntityManager::AddCommon(Common* common)

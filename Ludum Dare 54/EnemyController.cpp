@@ -24,7 +24,12 @@ void EnemyController::SetPlayerRef(Player* player)
 	ThePlayer = player;
 }
 
-void EnemyController::SetShipOne(size_t modelID)
+void EnemyController::SetBorderRef(Border* borders)
+{
+	Borders = borders;
+}
+
+void EnemyController::SetShipOneModelID(size_t modelID)
 {
 	ShipOneModelID = modelID;
 }
@@ -80,6 +85,7 @@ void EnemyController::SpawnOne(size_t count)
 			Ones[oneNumber]->SetModel(Man->CM.GetModel(ShipOneModelID), 15.0f);
 			Ones[oneNumber]->SetManagersRef(Man->EM);
 			Ones[oneNumber]->SetPlayerRef(ThePlayer);
+			Ones[oneNumber]->SetBorderRef(Borders);
 			Ones[oneNumber]->BeginRun(Cam);
 		}
 

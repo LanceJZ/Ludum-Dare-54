@@ -2,6 +2,7 @@
 #include "Common.h"
 #include "EnemyOne.h"
 #include "Managers.h"
+#include "Border.h"
 
 class EnemyController : public Common
 {
@@ -14,7 +15,8 @@ public:
 	void SetManagersRef(Managers& man);
 	void SetCameraRef(Camera& cam);
 	void SetPlayerRef(Player* player);
-	void SetShipOne(size_t modelID);
+	void SetBorderRef(Border* borders);
+	void SetShipOneModelID(size_t modelID);
 
 	bool Initialize();
 	bool BeginRun();
@@ -25,9 +27,11 @@ public:
 private:
 	size_t ShipOneModelID = 0;
 	size_t SpawnTimerID = 0;
+
 	Managers* Man = {};
 	Camera* Cam = {};
 	Player* ThePlayer = {};
+	Border* Borders = {};
 
 	void SpawnOne(size_t count);
 };

@@ -13,8 +13,8 @@
 class Common
 {
 public:
-	float GameScreenHalfWidth = { 0 };
-	float GameScreenHalfHeight = { 0 };
+	float GameWindowHalfWidth = { 0 };
+	float GameWindowHalfHeight = { 0 };
 
 	virtual bool Initialize();
 	virtual bool BeginRun();

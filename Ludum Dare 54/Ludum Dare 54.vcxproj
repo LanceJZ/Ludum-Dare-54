@@ -145,6 +145,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Border.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EnemyController.cpp">
       <SubType>
       </SubType>
@@ -165,6 +169,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Border.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EnemyController.h">
       <SubType>
       </SubType>

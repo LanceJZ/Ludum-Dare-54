@@ -33,6 +33,9 @@
     <ClCompile Include="EnemyController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Border.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="EnemyController.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Border.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

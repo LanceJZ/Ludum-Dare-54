@@ -18,6 +18,11 @@ void EnemyOne::SetPlayerRef(Player* player)
 	ThePlayer = player;
 }
 
+void EnemyOne::SetBorderRef(Border* borders)
+{
+	Borders = borders;
+}
+
 bool EnemyOne::Initialize()
 {
 	Model3D::Initialize();
@@ -57,9 +62,9 @@ void EnemyOne::Spawn()
 	float x = GetRandomFloat(-WindowWidth, WindowWidth);
 	float y = GetRandomFloat(-WindowHeight, WindowHeight);
 
-	if (GetRandomValue(1, 10) < 5)
+	if (GetRandomValue(1, 100) < 50)
 	{
-		if (GetRandomValue(1, 10) < 5)
+		if (GetRandomValue(1, 100) < 50)
 		{
 			x = WindowWidth + buffer;
 		}
@@ -70,13 +75,13 @@ void EnemyOne::Spawn()
 	}
 	else
 	{
-		if (GetRandomValue(1, 10) < 5)
+		if (GetRandomValue(1, 100) < 50)
 		{
 			y = WindowHeight + buffer;
 		}
 		else
 		{
-			y = WindowHeight - buffer;
+			y = -WindowHeight - buffer;
 		}
 	}
 
@@ -117,4 +122,5 @@ void EnemyOne::Collide()
 {
 	Enabled = false;
 	X(WindowWidth + 50);
+	Borders->EnemyHit();
 }

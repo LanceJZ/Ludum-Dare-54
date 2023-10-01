@@ -1,0 +1,118 @@
+#include "Border.h"
+
+Border::Border()
+{
+
+}
+
+Border::~Border()
+{
+}
+
+void Border::SetManagersRef(Managers& man)
+{
+	Man = &man;
+}
+
+void Border::SetCameraRef(Camera& cam)
+{
+	Cam = &cam;
+}
+
+void Border::SetBorderModelID(size_t modelID)
+{
+	BorderModelID = modelID;
+}
+
+bool Border::Initialize()
+{
+	Common::Initialize();
+
+	return false;
+}
+
+bool Border::BeginRun()
+{
+	Common::BeginRun();
+
+	ShrinkTimerID = Man->EM.AddTimer(1.0f);
+
+	SetupBorders();
+
+	return false;
+}
+
+void Border::Update()
+{
+	if (Man->EM.Timers[ShrinkTimerID]->Elapsed())
+	{
+		Man->EM.Timers[ShrinkTimerID]->Reset();
+		Shrink();
+	}
+}
+
+void Border::Draw()
+{
+
+}
+
+void Border::EnemyHit()
+{
+	Expand();
+}
+
+void Border::SetupBorders()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		Borders.push_back(Man->EM.AddModel3D(Man->CM.GetModel(BorderModelID)));
+		Man->EM.Model3Ds[Borders[i]]->BeginRun(Cam);
+		Man->EM.Model3Ds[Borders[i]]->Scale = 50.0f;
+	}
+
+	size_t borderTop = Borders[0];
+	size_t borderBottom = Borders[1];
+	size_t borderLeft = Borders[2];
+	size_t borderRight = Borders[3];
+
+	Man->EM.Model3Ds[borderLeft]->Rotation = -PI * 0.5f;
+	Man->EM.Model3Ds[borderRight]->Rotation = PI * 0.5f;
+	Man->EM.Model3Ds[borderBottom]->Rotation = PI;
+
+	Man->EM.Model3Ds[borderLeft]->X(-GameWindowHalfWidth);
+	Man->EM.Model3Ds[borderRight]->X(GameWindowHalfWidth);
+
+	Man->EM.Model3Ds[borderTop]->Y(-GameWindowHalfHeight);
+	Man->EM.Model3Ds[borderBottom]->Y(GameWindowHalfHeight);
+}
+
+void Border::Shrink()
+{
+	size_t borderTop = Borders[0];
+	size_t borderBottom = Borders[1];
+	size_t borderLeft = Borders[2];
+	size_t borderRight = Borders[3];
+
+	float speed = 3.666f;
+
+	Man->EM.Model3Ds[borderLeft]->Velocity.x = speed;
+	Man->EM.Model3Ds[borderRight]->Velocity.x = -speed;
+	Man->EM.Model3Ds[borderTop]->Velocity.y = speed;
+	Man->EM.Model3Ds[borderBottom]->Velocity.y = -speed;
+}
+
+void Border::Expand()
+{
+	size_t borderTop = Borders[0];
+	size_t borderBottom = Borders[1];
+	size_t borderLeft = Borders[2];
+	size_t borderRight = Borders[3];
+
+	float speed = 4.666f;
+
+	Man->EM.Model3Ds[borderLeft]->Velocity.x = -speed;
+	Man->EM.Model3Ds[borderRight]->Velocity.x = speed;
+	Man->EM.Model3Ds[borderTop]->Velocity.y = -speed;
+	Man->EM.Model3Ds[borderBottom]->Velocity.y = speed;
+
+}
