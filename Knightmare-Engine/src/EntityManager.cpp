@@ -78,14 +78,14 @@ void EntityManager::Update(float deltaTime)
 		if (entity->Enabled) entity->Update(deltaTime);
 	}
 
-	for (auto lineModel : LineModels)
+	for (size_t i = 0; i < LineModels.size(); i++)
 	{
-		if (lineModel->Enabled)	lineModel->Update(deltaTime);
+		if (LineModels[i]->Enabled) LineModels[i]->Update(deltaTime);
 	}
 
-	for (auto model3D : Model3Ds)
+	for (size_t i = 0; i < Model3Ds.size(); i++)
 	{
-		if (model3D->Enabled) model3D->Update(deltaTime);
+		if (Model3Ds[i]->Enabled) Model3Ds[i]->Update(deltaTime);
 	}
 
 	for (auto timer : Timers)

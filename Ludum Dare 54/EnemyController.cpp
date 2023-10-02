@@ -34,6 +34,16 @@ void EnemyController::SetShipOneModelID(size_t modelID)
 	ShipOneModelID = modelID;
 }
 
+void EnemyController::SetShipTwoModelID(size_t modelID)
+{
+	ShipTwoModelID = modelID;
+}
+
+void EnemyController::SetShotModelID(size_t modelID)
+{
+	ShotModelID = modelID;
+}
+
 bool EnemyController::Initialize()
 {
 
@@ -53,7 +63,13 @@ void EnemyController::Update()
 	{
 		Man->EM.Timers[SpawnTimerID]->Reset();
 		SpawnOne(5);
+
+		if (WaveOne > 5)
+		{
+			SpawnTwo(2);
+		}
 	}
+
 }
 
 void EnemyController::Draw()
@@ -90,5 +106,40 @@ void EnemyController::SpawnOne(size_t count)
 		}
 
 		Ones[oneNumber]->Spawn();
+	}
+
+	WaveOne++;
+}
+
+void EnemyController::SpawnTwo(size_t count)
+{
+	for (int two = 0; two < count; two++)
+	{
+		bool spawnNewTwo = true;
+		size_t twoNumber = Twos.size();
+
+		for (size_t twoCheck = 0; twoCheck < twoNumber; twoCheck++)
+		{
+			if (!Twos[twoCheck]->Enabled)
+			{
+				spawnNewTwo = false;
+				twoNumber = twoCheck;
+				break;
+			}
+		}
+
+		if (spawnNewTwo)
+		{
+			Twos.push_back(new EnemyTwo());
+			Man->EM.AddModel3D(Twos[twoNumber]);
+			Twos[twoNumber]->SetModel(Man->CM.GetModel(ShipTwoModelID), 15.0f);
+			Twos[twoNumber]->SetShotModelID(ShotModelID);
+			Twos[twoNumber]->SetManagersRef(*Man);
+			Twos[twoNumber]->SetPlayerRef(ThePlayer);
+			Twos[twoNumber]->SetBorderRef(Borders);
+			Twos[twoNumber]->BeginRun(Cam);
+		}
+
+		Twos[twoNumber]->Spawn();
 	}
 }

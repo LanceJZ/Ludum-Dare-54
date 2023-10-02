@@ -176,6 +176,11 @@ Model& Model3D::GetModel()
 	return TheModel;
 }
 
+Camera* Model3D::GetCamera()
+{
+	return TheCamera;
+}
+
 void Model3D::Spawn(Vector3 pos, Vector3 vel)
 {
 }

@@ -110,9 +110,28 @@ void Border::Expand()
 
 	float speed = 4.666f;
 
-	Man->EM.Model3Ds[borderLeft]->Velocity.x = -speed;
-	Man->EM.Model3Ds[borderRight]->Velocity.x = speed;
-	Man->EM.Model3Ds[borderTop]->Velocity.y = -speed;
-	Man->EM.Model3Ds[borderBottom]->Velocity.y = speed;
+	Vector3 left = Man->EM.Model3Ds[borderLeft]->Position;
+	Vector3 right = Man->EM.Model3Ds[borderRight]->Position;
+	Vector3 top = Man->EM.Model3Ds[borderTop]->Position;
+	Vector3 bottom = Man->EM.Model3Ds[borderBottom]->Position;
 
+	if (left.x > -GameWindowHalfWidth)
+	{
+		Man->EM.Model3Ds[borderLeft]->Velocity.x = -speed;
+	}
+
+	if (right.x < GameWindowHalfWidth)
+	{
+		Man->EM.Model3Ds[borderRight]->Velocity.x = speed;
+	}
+
+	if (top.y > -GameWindowHalfHeight)
+	{
+		Man->EM.Model3Ds[borderTop]->Velocity.y = -speed;
+	}
+
+	if (bottom.y < GameWindowHalfHeight)
+	{
+		Man->EM.Model3Ds[borderBottom]->Velocity.y = speed;
+	}
 }

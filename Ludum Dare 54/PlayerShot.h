@@ -1,6 +1,6 @@
 #pragma once
-#include "Managers.h"
 #include "Model3D.h"
+#include "Managers.h"
 
 class PlayerShot : public Model3D
 {

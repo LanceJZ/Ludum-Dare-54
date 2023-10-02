@@ -37,6 +37,8 @@ bool Game::Load()
 	ThePlayer->SetShipModelID(Man.CM.LoadTheModel("PlayerShip"));
 	ThePlayer->SetShotModelID(Man.CM.LoadTheModel("PlayerShot"));
 	Enemies->SetShipOneModelID(Man.CM.LoadTheModel("EnemyOne"));
+	Enemies->SetShipTwoModelID(Man.CM.LoadTheModel("EnemyTwo"));
+	Enemies->SetShotModelID(Man.CM.LoadTheModel("EnemyShot"));
 	Borders->SetBorderModelID(Man.CM.LoadTheModel("Border"));
 
 	return true;
