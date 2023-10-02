@@ -3,6 +3,7 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "Border.h"
+#include "ScoreKeeper.h"
 
 class EnemyOne : public Model3D
 {
@@ -13,6 +14,7 @@ public:
 	void SetManagersRef(EntityManager& man);
 	void SetPlayerRef(Player* player);
 	void SetBorderRef(Border* borders);
+	void SetScoreKeeperRef(ScoreKeeper* score);
 
 	bool Initialize();
 	bool BeginRun(Camera* camera);
@@ -32,6 +34,7 @@ private:
 	EntityManager* Man = {};
 	Player* ThePlayer = {};
 	Border* Borders = {};
+	ScoreKeeper* Score = {};
 
 	void ChasePlayer();
 	bool CheckCollision();

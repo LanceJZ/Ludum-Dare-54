@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "EnemyController.h"
 #include "Border.h"
+#include "ScoreKeeper.h"
 
 enum GameState
 {
@@ -39,6 +40,7 @@ private:
 	Player* ThePlayer = {};
 	EnemyController* Enemies = {};
 	Border* Borders = {};
+	ScoreKeeper* ScoreBoard = {};
 
 	void NewGame();
 	void Draw3D();

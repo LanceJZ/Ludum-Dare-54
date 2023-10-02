@@ -4,6 +4,7 @@
 #include "EnemyTwo.h"
 #include "Managers.h"
 #include "Border.h"
+#include "ScoreKeeper.h"
 
 class EnemyController : public Common
 {
@@ -18,6 +19,7 @@ public:
 	void SetCameraRef(Camera& cam);
 	void SetPlayerRef(Player* player);
 	void SetBorderRef(Border* borders);
+	void SetScoreKeeperRef(ScoreKeeper* score);
 	void SetShipOneModelID(size_t modelID);
 	void SetShipTwoModelID(size_t modelID);
 	void SetShotModelID(size_t modelID);
@@ -27,6 +29,8 @@ public:
 
 	void Update();
 	void Draw();
+
+	void Reset();
 
 private:
 	size_t ShipOneModelID = 0;
@@ -39,6 +43,7 @@ private:
 	Camera* Cam = {};
 	Player* ThePlayer = {};
 	Border* Borders = {};
+	ScoreKeeper* Score = {};
 
 	void SpawnOne(size_t count);
 	void SpawnTwo(size_t count);

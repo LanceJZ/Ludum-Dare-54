@@ -1,6 +1,7 @@
 #pragma once
 #include "Model3D.h"
 #include "Managers.h"
+#include "Border.h"
 
 class PlayerShot : public Model3D
 {
@@ -9,6 +10,8 @@ public:
 	virtual ~PlayerShot();
 
 	void SetManagersRef(EntityManager& man);
+	void SetBorderRef(Border* borders);
+
 	bool Initialize();
 	bool BeginRun(Camera* camera);
 
@@ -19,5 +22,9 @@ public:
 
 private:
 	size_t ShotTimerID = 0;
+
 	EntityManager* Man = {};
+	Border* Borders = {};
+
+	void CheckBorderHit();
 };

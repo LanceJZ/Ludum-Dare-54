@@ -117,6 +117,14 @@ void EntityManager::Draw3D()
 	}
 }
 
+void EntityManager::Draw2D()
+{
+	for (auto common : Commons)
+	{
+		common->Draw2D();
+	}
+}
+
 size_t EntityManager::AddEntity(Entity* entity)
 {
 	size_t entityNumber = Entities.size();

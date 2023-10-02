@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Border.h"
 #include "EnemyShot.h"
+#include "ScoreKeeper.h"
 
 class EnemyTwo : public Model3D
 {
@@ -16,6 +17,7 @@ public:
 	void SetManagersRef(Managers& man);
 	void SetPlayerRef(Player* player);
 	void SetBorderRef(Border* borders);
+	void SetScoreKeeperRef(ScoreKeeper* score);
 	void SetShotModelID(size_t modelID);
 
 	bool Initialize();
@@ -36,6 +38,7 @@ private:
 	Managers* Man = {};
 	Player* ThePlayer = {};
 	Border* Borders = {};
+	ScoreKeeper* Score = {};
 
 	void ChasePlayer();
 	bool CheckCollision();

@@ -23,6 +23,11 @@ void EnemyTwo::SetBorderRef(Border* borders)
 	Borders = borders;
 }
 
+void EnemyTwo::SetScoreKeeperRef(ScoreKeeper* score)
+{
+	Score = score;
+}
+
 void EnemyTwo::SetShotModelID(size_t modelID)
 {
 	ShotModelID = modelID;
@@ -156,8 +161,10 @@ void EnemyTwo::ChasePlayer()
 
 bool EnemyTwo::CheckCollision()
 {
-	if (CirclesIntersect(*ThePlayer))
+	if (CirclesIntersect(*ThePlayer) && ThePlayer->Enabled)
 	{
+		ThePlayer->Hit();
+
 		return true;
 	}
 
@@ -166,6 +173,7 @@ bool EnemyTwo::CheckCollision()
 		if (CirclesIntersect(*shot) && shot->Enabled)
 		{
 			shot->Enabled = false;
+
 			return true;
 		}
 	}
@@ -176,8 +184,9 @@ bool EnemyTwo::CheckCollision()
 void EnemyTwo::Collide()
 {
 	Enabled = false;
-	X(WindowWidth + 50);
+	X(WindowWidth + 50.0f);
 	Borders->EnemyHit();
+	Score->Add(50);
 }
 
 void EnemyTwo::Fire()

@@ -1,7 +1,9 @@
 #pragma once
 #include "Managers.h"
 #include "Common.h"
+#include "Border.h"
 #include "PlayerShot.h"
+#include "ScoreKeeper.h"
 
 struct ShotandTimer
 {
@@ -20,14 +22,14 @@ public:
 	bool GameOver = true;
 	bool Debug = false;
 	int Wave { 0 };
-	int Score { 0 };
-	int HighScore{ 0 };
 	int Lives { 0 };
 
 	std::vector<PlayerShot*> Shots;
 
 	void SetManagersRef(Managers& man);
 	void SetCameraRef(Camera& cam);
+	void SetBorderRef(Border* borders);
+	void SetScoreKeeperRef(ScoreKeeper* score);
 	void SetShipModelID(size_t modelID);
 	void SetShotModelID(size_t modelID);
 	bool Initialize();
@@ -37,6 +39,9 @@ public:
 	void Update(float deltaTime);
 	void Draw();
 
+	void Hit();
+	void Reset();
+	void NewGame();
 	bool GetShieldIsOn();
 	bool GetShieldIsOff();
 
@@ -48,9 +53,12 @@ private:
 	float ThrustSoundTime = 0;
 	float ShieldPower = 100;
 
+	Border* Borders = {};
 	Managers* Man = {};
 	Camera* Cam = {};
+	ScoreKeeper* Score = {};
 
+	void CheckBorderHit();
 	void Fire();
 	void ShieldOn();
 	void ShieldOff();

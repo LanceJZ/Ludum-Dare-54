@@ -13,6 +13,11 @@ void PlayerShot::SetManagersRef(EntityManager& man)
 	Man = &man;
 }
 
+void PlayerShot::SetBorderRef(Border* borders)
+{
+	Borders = borders;
+}
+
 bool PlayerShot::Initialize()
 {
 	Model3D::Initialize();
@@ -39,6 +44,8 @@ void PlayerShot::Update(float deltaTime)
 	{
 		Enabled = false;
 	}
+
+	CheckBorderHit();
 }
 
 void PlayerShot::Draw()
@@ -56,4 +63,32 @@ void PlayerShot::Spawn(Vector3 pos, float rot, Vector3 vel, size_t timerAmount)
 	Enabled = true;
 
 	Man->Timers[ShotTimerID]->Reset(timerAmount);
+}
+
+void PlayerShot::CheckBorderHit()
+{
+	size_t borderTop = Borders->Borders[0];
+	size_t borderBottom = Borders->Borders[1];
+	size_t borderLeft = Borders->Borders[2];
+	size_t borderRight = Borders->Borders[3];
+
+	if (X() + Radius > Man->Model3Ds[borderRight]->X())
+	{
+		Enabled = false;
+	}
+
+	if (X() - Radius < Man->Model3Ds[borderLeft]->X())
+	{
+		Enabled = false;
+	}
+
+	if (Y() + Radius > Man->Model3Ds[borderBottom]->Y())
+	{
+		Enabled = false;
+	}
+
+	if (Y() - Radius < Man->Model3Ds[borderTop]->Y())
+	{
+		Enabled = false;
+	}
 }

@@ -23,6 +23,11 @@ void EnemyOne::SetBorderRef(Border* borders)
 	Borders = borders;
 }
 
+void EnemyOne::SetScoreKeeperRef(ScoreKeeper* score)
+{
+	Score = score;
+}
+
 bool EnemyOne::Initialize()
 {
 	Model3D::Initialize();
@@ -101,8 +106,10 @@ void EnemyOne::ChasePlayer()
 
 bool EnemyOne::CheckCollision()
 {
-	if (CirclesIntersect(*ThePlayer))
+	if (CirclesIntersect(*ThePlayer) && ThePlayer->Enabled)
 	{
+		ThePlayer->Hit();
+
 		return true;
 	}
 
@@ -121,6 +128,7 @@ bool EnemyOne::CheckCollision()
 void EnemyOne::Collide()
 {
 	Enabled = false;
-	X(WindowWidth + 50);
+	X(WindowWidth + 50.0f);
 	Borders->EnemyHit();
+	Score->Add(10);
 }

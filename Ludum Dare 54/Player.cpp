@@ -18,6 +18,16 @@ void Player::SetCameraRef(Camera& cam)
 	Cam = &cam;
 }
 
+void Player::SetBorderRef(Border* borders)
+{
+	Borders = borders;
+}
+
+void Player::SetScoreKeeperRef(ScoreKeeper* score)
+{
+	Score = score;
+}
+
 void Player::SetShipModelID(size_t modelID)
 {
 	ShipModelID = modelID;
@@ -71,13 +81,46 @@ void Player::Update(float deltaTime)
 		ThrustOn(deltaTime);
 	}
 
-	CheckScreenEdge();
+	CheckBorderHit();
+
+	//CheckScreenEdge();
 }
 
 void Player::Draw()
 {
 	Model3D::Draw();
 
+}
+
+void Player::Hit()
+{
+	Lives -= 1;
+
+	Score->SetLives(Lives);
+
+	BeenHit = true;
+	Enabled = false;
+
+	if (Lives == 0)
+	{
+		GameOver = true;
+	}
+}
+
+void Player::Reset()
+{
+	Position = { 0, 0, 0 };
+	Velocity = { 0, 0, 0 };
+	Acceleration = { 0, 0, 0 };
+	Enabled = true;
+}
+
+void Player::NewGame()
+{
+	Lives = 4;
+	GameOver = false;
+	Score->SetLives(Lives);
+	Reset();
 }
 
 bool Player::GetShieldIsOn()
@@ -89,11 +132,39 @@ bool Player::GetShieldIsOn()
 
 bool Player::GetShieldIsOff()
 {
-	//StopSound(Sound06);
+	//StopSound(ShieldSound);
 
 	//Shield->Enabled = false;
 
 	return true;
+}
+
+void Player::CheckBorderHit()
+{
+	size_t borderTop = Borders->Borders[0];
+	size_t borderBottom = Borders->Borders[1];
+	size_t borderLeft = Borders->Borders[2];
+	size_t borderRight = Borders->Borders[3];
+
+	if (X() + Radius > Man->EM.Model3Ds[borderRight]->X())
+	{
+		Hit();
+	}
+
+	if (X() - Radius < Man->EM.Model3Ds[borderLeft]->X())
+	{
+		Hit();
+	}
+
+	if (Y() + Radius > Man->EM.Model3Ds[borderBottom]->Y())
+	{
+		Hit();
+	}
+
+	if (Y() - Radius < Man->EM.Model3Ds[borderTop]->Y())
+	{
+		Hit();
+	}
 }
 
 void Player::Fire()
@@ -117,6 +188,7 @@ void Player::Fire()
 		Man->EM.AddModel3D(Shots[shotNumber]);
 		Shots[shotNumber]->SetModel(Man->CM.GetModel(ShotModelID), 20.0f);
 		Shots[shotNumber]->SetManagersRef(Man->EM);
+		Shots[shotNumber]->SetBorderRef(Borders);
 		Shots[shotNumber]->BeginRun(Cam);
 	}
 

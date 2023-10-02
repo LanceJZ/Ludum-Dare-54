@@ -21,6 +21,7 @@ public:
 	void Draw();
 
 	void EnemyHit();
+	void Reset();
 
 private:
 	size_t BorderModelID = 0;

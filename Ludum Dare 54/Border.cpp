@@ -61,6 +61,20 @@ void Border::EnemyHit()
 	Expand();
 }
 
+void Border::Reset()
+{
+	size_t borderTop = Borders[0];
+	size_t borderBottom = Borders[1];
+	size_t borderLeft = Borders[2];
+	size_t borderRight = Borders[3];
+
+	Man->EM.Model3Ds[borderLeft]->X(-GameWindowHalfWidth);
+	Man->EM.Model3Ds[borderRight]->X(GameWindowHalfWidth);
+
+	Man->EM.Model3Ds[borderTop]->Y(-GameWindowHalfHeight);
+	Man->EM.Model3Ds[borderBottom]->Y(GameWindowHalfHeight);
+}
+
 void Border::SetupBorders()
 {
 	for (int i = 0; i < 4; i++)
@@ -79,11 +93,7 @@ void Border::SetupBorders()
 	Man->EM.Model3Ds[borderRight]->Rotation = PI * 0.5f;
 	Man->EM.Model3Ds[borderBottom]->Rotation = PI;
 
-	Man->EM.Model3Ds[borderLeft]->X(-GameWindowHalfWidth);
-	Man->EM.Model3Ds[borderRight]->X(GameWindowHalfWidth);
-
-	Man->EM.Model3Ds[borderTop]->Y(-GameWindowHalfHeight);
-	Man->EM.Model3Ds[borderBottom]->Y(GameWindowHalfHeight);
+	Reset();
 }
 
 void Border::Shrink()
@@ -93,7 +103,7 @@ void Border::Shrink()
 	size_t borderLeft = Borders[2];
 	size_t borderRight = Borders[3];
 
-	float speed = 3.666f;
+	float speed = 6.666f;
 
 	Man->EM.Model3Ds[borderLeft]->Velocity.x = speed;
 	Man->EM.Model3Ds[borderRight]->Velocity.x = -speed;

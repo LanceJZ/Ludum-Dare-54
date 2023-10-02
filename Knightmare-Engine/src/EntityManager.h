@@ -17,6 +17,7 @@ public:
 	void Input();
 	void Update(float deltaTime);
 	void Draw3D();
+	void Draw2D();
 
 	size_t AddEntity(Entity* entity);
 	size_t AddEntity();

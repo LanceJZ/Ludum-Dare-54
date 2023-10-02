@@ -19,6 +19,7 @@ public:
 	virtual bool Initialize();
 	virtual bool BeginRun();
 	virtual void Update();
+	virtual void Draw2D();
 	float GetRandomScreenY();
 	float GetRandomFloat(float min, float max);
 	float GetRandomRadian();

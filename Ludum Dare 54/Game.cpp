@@ -15,19 +15,24 @@ bool Game::Initialize(Camera &camera) //Initialize
 	Man.EM.AddModel3D(ThePlayer = new Player(), &Cam);
 	Man.EM.AddCommon(Enemies = new EnemyController());
 	Man.EM.AddCommon(Borders = new Border());
+	Man.EM.AddCommon(ScoreBoard = new ScoreKeeper());
 	ThePlayer->SetManagersRef(Man);
 	ThePlayer->SetCameraRef(Cam);
+	ThePlayer->SetScoreKeeperRef(ScoreBoard);
+	ThePlayer->SetBorderRef(Borders);
 	Enemies->SetManagersRef(Man);
 	Enemies->SetCameraRef(Cam);
 	Enemies->SetPlayerRef(ThePlayer);
 	Enemies->SetBorderRef(Borders);
+	Enemies->SetScoreKeeperRef(ScoreBoard);
 	Borders->SetManagersRef(Man);
 	Borders->SetCameraRef(Cam);
+	ScoreBoard->SetManagersRef(Man.EM);
 
 	Man.Initialize();
 
 	SetTargetFPS(120);
-	SetWindowTitle("Ludum Dare 54");
+	SetWindowTitle("Squeeze Play 0.1");
 
 	return true;
 }
@@ -127,6 +132,21 @@ void Game::Update(float deltaTime)
 	if (State == Pause)
 		return;
 
+	if (ThePlayer->BeenHit)
+	{
+		if (ThePlayer->GameOver)
+		{
+			NewGame();
+			return;
+		}
+
+		ThePlayer->Reset();
+		Enemies->Reset();
+		Borders->Reset();
+		ThePlayer->BeenHit = false;
+
+	}
+
 	Man.EM.Update(deltaTime);
 }
 
@@ -155,6 +175,11 @@ void Game::NewGame()
 {
 	State = InPlay;
 
+	ThePlayer->BeenHit = false;
+	ThePlayer->NewGame();
+	Enemies->Reset();
+	Borders->Reset();
+	ScoreBoard->Reset();
 }
 
 void Game::Draw3D()
@@ -164,4 +189,5 @@ void Game::Draw3D()
 
 void Game::Draw2D()
 {
+	Man.EM.Draw2D();
 }

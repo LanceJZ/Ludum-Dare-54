@@ -29,6 +29,11 @@ void EnemyController::SetBorderRef(Border* borders)
 	Borders = borders;
 }
 
+void EnemyController::SetScoreKeeperRef(ScoreKeeper* score)
+{
+	Score = score;
+}
+
 void EnemyController::SetShipOneModelID(size_t modelID)
 {
 	ShipOneModelID = modelID;
@@ -77,6 +82,26 @@ void EnemyController::Draw()
 
 }
 
+void EnemyController::Reset()
+{
+	for (auto one : Ones)
+	{
+		one->Enabled = false;
+	}
+
+	for (auto two : Twos)
+	{
+		two->Enabled = false;
+
+		for (auto shot : two->Shots)
+		{
+			shot->Enabled = false;
+		}
+	}
+
+	WaveOne = 0;
+}
+
 void EnemyController::SpawnOne(size_t count)
 {
 	for (int one = 0; one < count; one++)
@@ -102,6 +127,7 @@ void EnemyController::SpawnOne(size_t count)
 			Ones[oneNumber]->SetManagersRef(Man->EM);
 			Ones[oneNumber]->SetPlayerRef(ThePlayer);
 			Ones[oneNumber]->SetBorderRef(Borders);
+			Ones[oneNumber]->SetScoreKeeperRef(Score);
 			Ones[oneNumber]->BeginRun(Cam);
 		}
 
@@ -137,6 +163,7 @@ void EnemyController::SpawnTwo(size_t count)
 			Twos[twoNumber]->SetManagersRef(*Man);
 			Twos[twoNumber]->SetPlayerRef(ThePlayer);
 			Twos[twoNumber]->SetBorderRef(Borders);
+			Twos[twoNumber]->SetScoreKeeperRef(Score);
 			Twos[twoNumber]->BeginRun(Cam);
 		}
 
