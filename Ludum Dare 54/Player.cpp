@@ -28,6 +28,18 @@ void Player::SetScoreKeeperRef(ScoreKeeper* score)
 	Score = score;
 }
 
+void Player::SetSounds(Sound fireSound, Sound explodeSound, Sound thrustSound)
+{
+	FireSound = fireSound;
+	ExplodeSound = explodeSound;
+	ThrustSound = thrustSound;
+}
+
+void Player::SetShotSound(Sound borderHit)
+{
+	BorderHitSound = borderHit;
+}
+
 void Player::SetShipModelID(size_t modelID)
 {
 	ShipModelID = modelID;
@@ -83,7 +95,7 @@ void Player::Update(float deltaTime)
 
 	CheckBorderHit();
 
-	//CheckScreenEdge();
+	CheckScreenEdge();
 }
 
 void Player::Draw()
@@ -94,6 +106,8 @@ void Player::Draw()
 
 void Player::Hit()
 {
+	PlaySound(ExplodeSound);
+
 	Lives -= 1;
 
 	Score->SetLives(Lives);
@@ -169,6 +183,8 @@ void Player::CheckBorderHit()
 
 void Player::Fire()
 {
+	PlaySound(FireSound);
+
 	bool spawnNewShot = true;
 	size_t shotNumber = Shots.size();
 
@@ -189,6 +205,7 @@ void Player::Fire()
 		Shots[shotNumber]->SetModel(Man->CM.GetModel(ShotModelID), 20.0f);
 		Shots[shotNumber]->SetManagersRef(Man->EM);
 		Shots[shotNumber]->SetBorderRef(Borders);
+		Shots[shotNumber]->SetSound(BorderHitSound);
 		Shots[shotNumber]->BeginRun(Cam);
 	}
 
@@ -207,6 +224,11 @@ void Player::ShieldOff()
 
 void Player::ThrustOn(float deltaTime)
 {
+	if (!IsSoundPlaying(ThrustSound))
+	{
+		PlaySound(ThrustSound);
+	}
+
 	Acceleration = AccelerationToMaxAtRotation(350.666f, 0.001f, deltaTime);
 }
 

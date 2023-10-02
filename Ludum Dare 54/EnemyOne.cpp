@@ -28,6 +28,11 @@ void EnemyOne::SetScoreKeeperRef(ScoreKeeper* score)
 	Score = score;
 }
 
+void EnemyOne::SetSound(Sound hit)
+{
+	HitSound = hit;
+}
+
 bool EnemyOne::Initialize()
 {
 	Model3D::Initialize();
@@ -131,4 +136,5 @@ void EnemyOne::Collide()
 	X(WindowWidth + 50.0f);
 	Borders->EnemyHit();
 	Score->Add(10);
+	PlaySound(HitSound);
 }

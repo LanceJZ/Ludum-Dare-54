@@ -33,6 +33,12 @@ void EnemyTwo::SetShotModelID(size_t modelID)
 	ShotModelID = modelID;
 }
 
+void EnemyTwo::SetSounds(Sound hit, Sound fire)
+{
+	HitSound = hit;
+	FireSound = fire;
+}
+
 bool EnemyTwo::Initialize()
 {
 	Model3D::Initialize();
@@ -187,10 +193,12 @@ void EnemyTwo::Collide()
 	X(WindowWidth + 50.0f);
 	Borders->EnemyHit();
 	Score->Add(50);
+	PlaySound(HitSound);
 }
 
 void EnemyTwo::Fire()
 {
+	PlaySound(FireSound);
 	bool spawnShot = true;
 	size_t shotNumber = Shots.size();
 

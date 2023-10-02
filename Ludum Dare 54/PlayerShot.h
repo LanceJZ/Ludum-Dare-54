@@ -11,6 +11,7 @@ public:
 
 	void SetManagersRef(EntityManager& man);
 	void SetBorderRef(Border* borders);
+	void SetSound(Sound borderHit);
 
 	bool Initialize();
 	bool BeginRun(Camera* camera);
@@ -22,6 +23,8 @@ public:
 
 private:
 	size_t ShotTimerID = 0;
+
+	Sound BorderHitSound;
 
 	EntityManager* Man = {};
 	Border* Borders = {};

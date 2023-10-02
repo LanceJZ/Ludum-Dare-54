@@ -30,6 +30,8 @@ public:
 	void SetCameraRef(Camera& cam);
 	void SetBorderRef(Border* borders);
 	void SetScoreKeeperRef(ScoreKeeper* score);
+	void SetSounds(Sound fireSound, Sound explodeSound, Sound thrustSound);
+	void SetShotSound(Sound borderHit);
 	void SetShipModelID(size_t modelID);
 	void SetShotModelID(size_t modelID);
 	bool Initialize();
@@ -52,6 +54,11 @@ private:
 	int NextNewLifeScore = 10000;
 	float ThrustSoundTime = 0;
 	float ShieldPower = 100;
+
+	Sound FireSound;
+	Sound ExplodeSound;
+	Sound ThrustSound;
+	Sound BorderHitSound;
 
 	Border* Borders = {};
 	Managers* Man = {};

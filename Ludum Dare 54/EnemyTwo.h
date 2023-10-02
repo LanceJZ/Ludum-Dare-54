@@ -19,6 +19,7 @@ public:
 	void SetBorderRef(Border* borders);
 	void SetScoreKeeperRef(ScoreKeeper* score);
 	void SetShotModelID(size_t modelID);
+	void SetSounds(Sound hit, Sound fire);
 
 	bool Initialize();
 	bool BeginRun(Camera* camera);
@@ -34,6 +35,9 @@ private:
 	size_t ShotModelID = 0;
 	float Speed = 22.666f;
 	float MaxSpeed = 52.666;
+
+	Sound HitSound;
+	Sound FireSound;
 
 	Managers* Man = {};
 	Player* ThePlayer = {};

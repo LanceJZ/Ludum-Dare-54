@@ -49,6 +49,13 @@ void EnemyController::SetShotModelID(size_t modelID)
 	ShotModelID = modelID;
 }
 
+void EnemyController::SetSounds(Sound oneHit, Sound twoHit, Sound twoFire)
+{
+	OneHitSound = oneHit;
+	TwoHitSound = twoHit;
+	TwoFireSound = twoFire;
+}
+
 bool EnemyController::Initialize()
 {
 
@@ -128,6 +135,7 @@ void EnemyController::SpawnOne(size_t count)
 			Ones[oneNumber]->SetPlayerRef(ThePlayer);
 			Ones[oneNumber]->SetBorderRef(Borders);
 			Ones[oneNumber]->SetScoreKeeperRef(Score);
+			Ones[oneNumber]->SetSound(OneHitSound);
 			Ones[oneNumber]->BeginRun(Cam);
 		}
 
@@ -164,6 +172,7 @@ void EnemyController::SpawnTwo(size_t count)
 			Twos[twoNumber]->SetPlayerRef(ThePlayer);
 			Twos[twoNumber]->SetBorderRef(Borders);
 			Twos[twoNumber]->SetScoreKeeperRef(Score);
+			Twos[twoNumber]->SetSounds(TwoHitSound, TwoFireSound);
 			Twos[twoNumber]->BeginRun(Cam);
 		}
 

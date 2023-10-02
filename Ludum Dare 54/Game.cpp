@@ -39,12 +39,24 @@ bool Game::Initialize(Camera &camera) //Initialize
 
 bool Game::Load()
 {
+	// Load Models.
 	ThePlayer->SetShipModelID(Man.CM.LoadTheModel("PlayerShip"));
 	ThePlayer->SetShotModelID(Man.CM.LoadTheModel("PlayerShot"));
 	Enemies->SetShipOneModelID(Man.CM.LoadTheModel("EnemyOne"));
 	Enemies->SetShipTwoModelID(Man.CM.LoadTheModel("EnemyTwo"));
 	Enemies->SetShotModelID(Man.CM.LoadTheModel("EnemyShot"));
 	Borders->SetBorderModelID(Man.CM.LoadTheModel("Border"));
+
+	// Load Sounds.
+	ThePlayer->SetSounds(Man.CM.LoadAndGetSound("PlayerFire"),
+		Man.CM.LoadAndGetSound("PlayerExplode"),
+		Man.CM.LoadAndGetSound("PlayerThrust"));
+
+	ThePlayer->SetShotSound(Man.CM.LoadAndGetSound("BorderHit"));
+
+	Enemies->SetSounds(Man.CM.LoadAndGetSound("EnemyOneHit"),
+		Man.CM.LoadAndGetSound("EnemyTwoHit"),
+		Man.CM.LoadAndGetSound("EnemyOneFire"));
 
 	return true;
 }

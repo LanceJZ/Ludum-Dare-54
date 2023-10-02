@@ -23,6 +23,7 @@ public:
 	void SetShipOneModelID(size_t modelID);
 	void SetShipTwoModelID(size_t modelID);
 	void SetShotModelID(size_t modelID);
+	void SetSounds(Sound oneHit, Sound twoHit, Sound twoFire);
 
 	bool Initialize();
 	bool BeginRun();
@@ -38,6 +39,10 @@ private:
 	size_t ShotModelID = 0;
 	size_t SpawnTimerID = 0;
 	int WaveOne = 0;
+
+	Sound OneHitSound;
+	Sound TwoHitSound;
+	Sound TwoFireSound;
 
 	Managers* Man = {};
 	Camera* Cam = {};

@@ -18,6 +18,11 @@ void PlayerShot::SetBorderRef(Border* borders)
 	Borders = borders;
 }
 
+void PlayerShot::SetSound(Sound borderHit)
+{
+	BorderHitSound = borderHit;
+}
+
 bool PlayerShot::Initialize()
 {
 	Model3D::Initialize();
@@ -75,20 +80,24 @@ void PlayerShot::CheckBorderHit()
 	if (X() + Radius > Man->Model3Ds[borderRight]->X())
 	{
 		Enabled = false;
+		PlaySound(BorderHitSound);
 	}
 
 	if (X() - Radius < Man->Model3Ds[borderLeft]->X())
 	{
 		Enabled = false;
+		PlaySound(BorderHitSound);
 	}
 
 	if (Y() + Radius > Man->Model3Ds[borderBottom]->Y())
 	{
 		Enabled = false;
+		PlaySound(BorderHitSound);
 	}
 
 	if (Y() - Radius < Man->Model3Ds[borderTop]->Y())
 	{
 		Enabled = false;
+		PlaySound(BorderHitSound);
 	}
 }

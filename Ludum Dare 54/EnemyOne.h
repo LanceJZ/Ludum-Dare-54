@@ -15,6 +15,7 @@ public:
 	void SetPlayerRef(Player* player);
 	void SetBorderRef(Border* borders);
 	void SetScoreKeeperRef(ScoreKeeper* score);
+	void SetSound(Sound hit);
 
 	bool Initialize();
 	bool BeginRun(Camera* camera);
@@ -30,6 +31,8 @@ private:
 	float TurnSpeed = 0.25f;
 	float MaxTurnSpeed = 0.25f;
 	float RotateMagnitude = PI / 2;
+
+	Sound HitSound;
 
 	EntityManager* Man = {};
 	Player* ThePlayer = {};
